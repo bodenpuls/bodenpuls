@@ -4,20 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bodenpuls – Bewässerung, die den Boden liest</title>
+<meta name="description" content="Bodenpuls gießt nach gemessener Bodenfeuchte, nicht nach Uhrzeit. Bis zu sieben Zonen, kein Abo, keine Cloud.">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f4f0;color:#1e2a22;line-height:1.5}
+body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f4f0;color:#1e2a22;line-height:1.55}
 header{background:#2c3a2e;color:#fff;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20}
 header h1{font-size:1.4rem;font-weight:600}
 header a{color:#fff;text-decoration:none}
 .cart-btn{background:#fff;color:#2c3a2e;border:0;border-radius:10px;padding:.55rem 1rem;font-weight:600;cursor:pointer}
 .cart-btn span{background:#2c3a2e;color:#fff;border-radius:99px;padding:.1rem .45rem;margin-left:.4rem;font-size:.85rem}
-.hero{position:relative;height:min(62vh,520px);background:#2c3a2e}
+.hero{position:relative;height:min(68vh,560px);background:#2c3a2e}
 .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero-text{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:2.5rem 1.5rem;background:linear-gradient(transparent,rgba(0,0,0,.55));color:#fff}
-.hero-text h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:650;letter-spacing:-.03em;max-width:20ch}
-.hero-text p{margin-top:.6rem;font-size:1.05rem;opacity:.92;max-width:36rem}
-.grid{max-width:1100px;margin:0 auto;padding:2rem 1.2rem;display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.hero-text{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:2.5rem 1.5rem;background:linear-gradient(transparent,rgba(0,0,0,.62));color:#fff}
+.hero-text h2{font-size:clamp(1.9rem,4.2vw,3rem);font-weight:650;letter-spacing:-.03em;max-width:18ch}
+.hero-text p{margin-top:.7rem;font-size:1.08rem;opacity:.94;max-width:36rem}
+.section{max-width:1100px;margin:0 auto;padding:2.4rem 1.2rem}
+.section h2{font-size:1.7rem;letter-spacing:-.02em;margin-bottom:.35rem}
+.lead{color:#3d4f44;max-width:40rem;margin-bottom:1.3rem}
+.points{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.point{background:#fff;border-radius:14px;padding:1.15rem 1.2rem;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.point strong{display:block;margin-bottom:.3rem}
+.point p{color:#4a5c50;font-size:.95rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
 .card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.04);display:flex;flex-direction:column}
 .card a.imgwrap{display:block}
 .card img{width:100%;height:220px;object-fit:cover;display:block}
@@ -32,6 +40,13 @@ header a{color:#fff;text-decoration:none}
 .qty input{width:52px;text-align:center;border:1px solid #d5d2cc;border-radius:8px;padding:.4rem;font-size:1rem}
 .add{background:#2c3a2e;color:#fff;border:0;border-radius:10px;padding:.75rem 1.2rem;font-weight:500;cursor:pointer;width:100%}
 .add:hover{background:#1e2a22}
+.args{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.args article{background:#fff;border-radius:14px;padding:1.05rem 1.15rem}
+.args strong{display:block;margin-bottom:.25rem}
+.args p{color:#4a5c50;font-size:.95rem}
+.faq details{background:#fff;border-radius:12px;padding:.85rem 1.05rem;margin:.45rem 0}
+.faq summary{cursor:pointer;font-weight:600}
+.faq p{color:#4a5c50;margin-top:.4rem}
 footer{text-align:center;padding:2rem 1rem;color:#6b7c70;font-size:.9rem}
 footer a{color:#2c3a2e;margin:0 .4rem}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;z-index:30}
@@ -46,7 +61,7 @@ footer a{color:#2c3a2e;margin:0 .4rem}
 .total{padding:1rem 1.2rem;border-top:1px solid #eee;font-size:1.15rem;font-weight:650}
 .checkout{margin:0 1.2rem 1.2rem;background:#2c3a2e;color:#fff;border:0;border-radius:10px;padding:.9rem;font-weight:600;cursor:pointer}
 .empty{color:#6b7c70;padding:1rem 0}
-@media(max-width:700px){.grid{grid-template-columns:1fr}.hero{height:48vh}}
+@media(max-width:800px){.points,.grid,.args{grid-template-columns:1fr}.hero{height:50vh}}
 </style>
 </head>
 <body>
@@ -54,45 +69,112 @@ footer a{color:#2c3a2e;margin:0 .4rem}
   <h1><a href="index.html">Bodenpuls</a></h1>
   <button class="cart-btn" onclick="openCart()">Warenkorb <span id="count">0</span></button>
 </header>
+
 <section class="hero">
-  <img src="01-garten-pfosten.jpg" alt="Garten">
+  <img src="01-garten-pfosten.jpg" alt="Garten mit Bodenpuls-Steuerung">
   <div class="hero-text">
     <h2>Bewässerung, die den Boden liest.</h2>
-    <p>Sensoren messen die Feuchte im Boden. Die Steuerung öffnet Ventile nur dort, wo der Wert unter dem Soll liegt.</p>
+    <p>Gießt nur, wenn die Zone wirklich trocken ist. Nicht nach Uhrzeit. Kein Abo, keine Cloud.</p>
   </div>
 </section>
-<section class="grid">
-  <article class="card">
-    <a class="imgwrap" href="steuerung.html"><img src="02-wand-box.jpg" alt="Bodenpuls 7"></a>
-    <div class="card-body">
-      <h3><a href="steuerung.html">Bodenpuls 7</a></h3>
-      <div class="price">549 €</div>
-      <p>Steuerung für bis zu sieben Zonen. Für Beet, Rasen, Gewächshaus und Kübel. Bewässert nach gemessener Bodenfeuchte.</p>
-      <a class="more" href="steuerung.html">Mehr erfahren →</a>
-      <div class="qty">
-        <button onclick="chg('box',-1)">−</button>
-        <input id="q-box" type="number" value="1" min="1" max="10">
-        <button onclick="chg('box',1)">+</button>
-      </div>
-      <button class="add" onclick="add('box')">In den Warenkorb</button>
+
+<section class="section">
+  <h2>Drei Gründe</h2>
+  <div class="points">
+    <div class="point">
+      <strong>Der Boden entscheidet</strong>
+      <p>Unter Soll minus 5 % öffnet das Ventil. Am Soll schließt es. Dazwischen bleibt es zu, auch bei kleinen Schwankungen.</p>
     </div>
-  </article>
-  <article class="card">
-    <a class="imgwrap" href="sensor.html"><img src="03-tisch-display.jpg" alt="Sensor"></a>
-    <div class="card-body">
-      <h3><a href="sensor.html">Bodenfeuchte-Sensor</a></h3>
-      <div class="price">49 €</div>
-      <p>Bodenfeuchtesensor für eine Zone. Für Beet, Rasen und Kübel. Selbst adressierbar, Kabellänge frei wählbar.</p>
-      <a class="more" href="sensor.html">Mehr erfahren →</a>
-      <div class="qty">
-        <button onclick="chg('sensor',-1)">−</button>
-        <input id="q-sensor" type="number" value="1" min="1" max="20">
-        <button onclick="chg('sensor',1)">+</button>
-      </div>
-      <button class="add" onclick="add('sensor')">In den Warenkorb</button>
+    <div class="point">
+      <strong>Kein Dauerlauf</strong>
+      <p>Jede Gießung hat eine Maximalzeit. Danach Pause. Höchstens drei Nachgießrunden, dann erst wieder, wenn der Boden erneut unter die Startschwelle fällt.</p>
     </div>
-  </article>
+    <div class="point">
+      <strong>Eine Zone nach der anderen</strong>
+      <p>Immer nur ein Ventil offen. Der Druck bleibt, das Netzteil wird nicht von mehreren Zonen gleichzeitig belastet.</p>
+    </div>
+  </div>
 </section>
+
+<section class="section" style="padding-top:0">
+  <h2>Bestellen</h2>
+  <p class="lead">Die Box steuert bis zu sieben Zonen. Sensoren bestellst du einzeln, einen pro Zone.</p>
+  <div class="grid">
+    <article class="card">
+      <a class="imgwrap" href="steuerung.html"><img src="02-wand-box.jpg" alt="Bodenpuls 7 an der Wand"></a>
+      <div class="card-body">
+        <h3><a href="steuerung.html">Bodenpuls 7</a></h3>
+        <div class="price">549 €</div>
+        <p>Sieben Sensoreingänge, sieben Ventilausgänge, Pumpe an A1, separates Display. Beet, Rasen, Gewächshaus, Kübel. Mehr Zonen auf Anfrage.</p>
+        <a class="more" href="steuerung.html">Mehr zur Steuerung →</a>
+        <div class="qty">
+          <button onclick="chg('box',-1)">−</button>
+          <input id="q-box" type="number" value="1" min="1" max="10">
+          <button onclick="chg('box',1)">+</button>
+        </div>
+        <button class="add" onclick="add('box')">In den Warenkorb</button>
+      </div>
+    </article>
+    <article class="card">
+      <a class="imgwrap" href="sensor.html"><img src="03-tisch-display.jpg" alt="Bodenfeuchte-Sensor"></a>
+      <div class="card-body">
+        <h3><a href="sensor.html">Bodenfeuchte-Sensor</a></h3>
+        <div class="price">49 €</div>
+        <p>Feuchte und Temperatur in der Wurzelzone. Ein Sensor, eine Zone. Kabellänge frei wählbar.</p>
+        <a class="more" href="sensor.html">Einbau und Position →</a>
+        <div class="qty">
+          <button onclick="chg('sensor',-1)">−</button>
+          <input id="q-sensor" type="number" value="1" min="1" max="20">
+          <button onclick="chg('sensor',1)">+</button>
+        </div>
+        <button class="add" onclick="add('sensor')">In den Warenkorb</button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <h2>Was noch zählt</h2>
+  <div class="args">
+    <article>
+      <strong>Handbetrieb zum Prüfen</strong>
+      <p>Ventil und Schlauch testen, ohne dass der Sollwert stoppt. Knopf an, Knopf aus, sonst fünf Minuten. Danach wieder die normale Prüfung.</p>
+    </article>
+    <article>
+      <strong>Frost, Winter, einzelne Zone</strong>
+      <p>Unter der Frostgrenze schließt die Zone. Die Anlage oder eine einzelne Zone lässt sich abschalten. Die Werte bleiben.</p>
+    </article>
+    <article>
+      <strong>Stromausfall ändert nichts</strong>
+      <p>Soll, Pause und letzte Gießdauer liegen im Speicher. Nach dem Einschalten sind sie wieder da. Kein Konto, kein Server.</p>
+    </article>
+    <article>
+      <strong>Display vor Ort</strong>
+      <p>Istwert, Sollwert, Status und letzte Gießdauer. Nach der eingestellten Zeit wird der Schirm dunkel. Tippen macht ihn hell.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section faq" style="padding-top:0">
+  <h2>Kurz gefragt</h2>
+  <details>
+    <summary>Brauche ich WLAN oder eine App?</summary>
+    <p>Nein. Alles läuft an der Box. Kein Konto, kein Abo.</p>
+  </details>
+  <details>
+    <summary>Was bedeutet „Pause“?</summary>
+    <p>Die Maximalzeit war um, der Sollwert noch nicht erreicht. Ventil zu, die Zone wartet und misst neu.</p>
+  </details>
+  <details>
+    <summary>Wie viele Sensoren?</summary>
+    <p>Einen pro Zone. Die Box hat sieben Eingänge.</p>
+  </details>
+  <details>
+    <summary>Kann ich Schläuche prüfen, ohne bis zum Soll zu gießen?</summary>
+    <p>Ja. Handbetrieb. Höchstens fünf Minuten oder bis du ihn ausschaltest.</p>
+  </details>
+</section>
+
 <footer>
   <a href="impressum.html">Impressum</a>
   <a href="datenschutz.html">Datenschutz</a>
@@ -117,9 +199,7 @@ const PRODUCTS = {
   sensor: { name: "Bodenfeuchte-Sensor", price: 49 }
 };
 const PAYPAL_EMAIL = "info@bodenpuls.de";
-
 let cart = JSON.parse(localStorage.getItem("bp-cart") || "{}");
-
 function save(){ localStorage.setItem("bp-cart", JSON.stringify(cart)); render(); }
 function chg(id, d){
   const el = document.getElementById("q-"+id);
