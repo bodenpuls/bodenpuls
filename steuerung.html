@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bodenpuls 7 – Steuerung</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f4f0;color:#1e2a22;line-height:1.6}
+header{background:#2c3a2e;color:#fff;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+header a{color:#fff;text-decoration:none;font-weight:600}
+.cart-btn{background:#fff;color:#2c3a2e;border:0;border-radius:10px;padding:.55rem 1rem;font-weight:600;cursor:pointer}
+.wrap{max-width:900px;margin:0 auto;padding:2rem 1.2rem}
+.back{color:#2c3a2e;text-decoration:none;font-size:.95rem}
+.hero-img{width:100%;border-radius:16px;margin:1rem 0 1.5rem;max-height:420px;object-fit:cover}
+h1{font-size:2rem;letter-spacing:-.02em}
+.price{font-size:1.8rem;font-weight:650;color:#2c3a2e;margin:.4rem 0 1rem}
+.lead{font-size:1.1rem;color:#3d4f44;margin-bottom:1.2rem}
+ul{margin:0 0 1.2rem 1.2rem}
+li{margin:.35rem 0}
+.qty{display:flex;align-items:center;gap:.6rem;margin:1rem 0}
+.qty button{width:34px;height:34px;border:1px solid #d5d2cc;background:#fff;border-radius:8px;font-size:1.1rem;cursor:pointer}
+.qty input{width:52px;text-align:center;border:1px solid #d5d2cc;border-radius:8px;padding:.4rem}
+.add{background:#2c3a2e;color:#fff;border:0;border-radius:10px;padding:.8rem 1.4rem;font-weight:500;cursor:pointer}
+h2{font-size:1.25rem;margin:1.6rem 0 .5rem}
+</style>
+</head>
+<body>
+<header>
+  <a href="index.html">Bodenpuls</a>
+  <button class="cart-btn" onclick="location.href='index.html'">Warenkorb</button>
+</header>
+<article class="wrap">
+  <a class="back" href="index.html">← Zur Übersicht</a>
+  <img class="hero-img" src="02-wand-box.jpg" alt="Bodenpuls 7 Steuerungsbox">
+  <h1>Bodenpuls 7</h1>
+  <div class="price">549 €</div>
+  <p class="lead">Die Steuerung für den Garten. Sie liest die Bodenfeuchte und bewässert nur die Zonen, die es brauchen.</p>
+  <h2>Was sie macht</h2>
+  <ul>
+    <li>Bis zu sieben Zonen, jede mit eigenem Sensor und eigenem Ventil.</li>
+    <li>Öffnet ein Ventil nur, wenn die gemessene Feuchte unter dem Sollwert liegt.</li>
+    <li>Display zeigt Ist- und Sollwerte, Status und letzte Bewässerung.</li>
+    <li>Werte bleiben gespeichert, auch nach Stromausfall.</li>
+    <li>Wetterfestes Gehäuse, für den Außenbereich.</li>
+  </ul>
+  <h2>Für wen</h2>
+  <p>Für Rasen, Beete und Gewächshaus. Eine Box reicht für einen normalen Hausgarten. Mehr Zonen auf Anfrage.</p>
+  <h2>Lieferumfang</h2>
+  <ul>
+    <li>Steuerungsbox mit Display</li>
+    <li>Anschluss für bis zu sieben Sensoren und sieben Ventile</li>
+    <li>Kurzanleitung</li>
+  </ul>
+  <p>Sensoren und Ventile sind nicht enthalten. Sensoren bestellst du einzeln, die Anzahl bestimmst du selbst.</p>
+  <div class="qty">
+    <button onclick="chg(-1)">−</button>
+    <input id="q" type="number" value="1" min="1" max="10">
+    <button onclick="chg(1)">+</button>
+  </div>
+  <button class="add" onclick="addToCart()">In den Warenkorb</button>
+</article>
+<script>
+function chg(d){ const el=document.getElementById('q'); el.value=Math.max(1,Math.min(10,(+el.value||1)+d)); }
+function addToCart(){
+  const q=Math.max(1,+document.getElementById('q').value||1);
+  const cart=JSON.parse(localStorage.getItem('bp-cart')||'{}');
+  cart.box=(cart.box||0)+q;
+  localStorage.setItem('bp-cart',JSON.stringify(cart));
+  location.href='index.html';
+}
+</script>
+</body>
+</html>
