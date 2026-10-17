@@ -4,27 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bodenpuls 7 – Steuerung</title>
+<meta name="description" content="Bodenpuls 7 steuert bis zu sieben Zonen nach gemessener Bodenfeuchte. Ventile, Pumpe, Display. Kein WLAN, kein Abo.">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f4f0;color:#1e2a22;line-height:1.6}
 header{background:#2c3a2e;color:#fff;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
 header a{color:#fff;text-decoration:none;font-weight:600}
 .cart-btn{background:#fff;color:#2c3a2e;border:0;border-radius:10px;padding:.55rem 1rem;font-weight:600;cursor:pointer}
-.wrap{max-width:900px;margin:0 auto;padding:2rem 1.2rem}
+.wrap{max-width:860px;margin:0 auto;padding:2rem 1.2rem}
 .back{color:#2c3a2e;text-decoration:none;font-size:.95rem}
 .hero-img{width:100%;border-radius:16px;margin:1rem 0 1.5rem;max-height:420px;object-fit:cover}
-.example{width:100%;border-radius:12px;margin:.6rem 0 1.2rem;display:block}
-.caption{font-size:.9rem;color:#5a6b60;margin:-.6rem 0 1.4rem}
 h1{font-size:2rem;letter-spacing:-.02em}
 .price{font-size:1.8rem;font-weight:650;color:#2c3a2e;margin:.4rem 0 1rem}
 .lead{font-size:1.1rem;color:#3d4f44;margin-bottom:1.2rem}
-ul{margin:0 0 1.2rem 1.2rem}
+ul{margin:0 0 1.1rem 1.15rem}
 li{margin:.35rem 0}
 .qty{display:flex;align-items:center;gap:.6rem;margin:1rem 0}
 .qty button{width:34px;height:34px;border:1px solid #d5d2cc;background:#fff;border-radius:8px;font-size:1.1rem;cursor:pointer}
 .qty input{width:52px;text-align:center;border:1px solid #d5d2cc;border-radius:8px;padding:.4rem}
 .add{background:#2c3a2e;color:#fff;border:0;border-radius:10px;padding:.8rem 1.4rem;font-weight:500;cursor:pointer}
-h2{font-size:1.25rem;margin:1.6rem 0 .5rem}
+h2{font-size:1.22rem;margin:1.5rem 0 .4rem}
 </style>
 </head>
 <body>
@@ -34,32 +33,44 @@ h2{font-size:1.25rem;margin:1.6rem 0 .5rem}
 </header>
 <article class="wrap">
   <a class="back" href="index.html">← Zur Übersicht</a>
-  <img class="hero-img" src="02-wand-box.jpg" alt="Bodenpuls 7">
+  <img class="hero-img" src="02-wand-box.jpg" alt="Bodenpuls 7 Steuerungsbox">
   <h1>Bodenpuls 7</h1>
   <div class="price">549 €</div>
-  <p class="lead">Bedarfsgerechte Bewässerung für bis zu sieben Zonen. Die Steuerung misst die Bodenfeuchte und schaltet das zugehörige Magnetventil, wenn der Sollwert unterschritten wird.</p>
-  <h2>Merkmale</h2>
+  <p class="lead">Bis zu sieben Zonen, jede mit eigenem Sensor und eigenem Ventil. Die Pumpe hängt über ein Schütz an A1. Kein WLAN, keine App, kein Abo. Mehr Zonen auf Anfrage.</p>
+
+  <img class="hero-img" src="aufbau.jpg" alt="Aufbau: Zonen an der Steuerung, Ventile und Pumpenschütz separat" style="background:#111">
+
+  <h2>Anschlüsse</h2>
   <ul>
-    <li>Sieben Sensoreingänge. Ein Sensor pro Zone.</li>
-    <li>Sieben Ausgänge für handelsübliche 24-V-Magnetventile. Ein Ausgang pro Zone.</li>
-    <li>Ausgang A1 zur Aktivierung einer Pumpe.</li>
-    <li>Separates Display. Zeigt Istwert, Sollwert, Zonenstatus und letzte Bewässerung.</li>
-    <li>Einstellungen bleiben bei Stromausfall erhalten.</li>
-    <li>Gehäuse für den dauerhaften Einsatz im Außenbereich.</li>
-    <li>Für Beet, Rasen, Gewächshaus und Kübel. Mehr Zonen auf Anfrage.</li>
+    <li>Sieben Sensoreingänge, sieben Ventilausgänge.</li>
+    <li>Ausgang A1 für die Pumpe, nur wenn eine Zone gießt.</li>
+    <li>Separates Display. Gehäuse für draußen.</li>
   </ul>
+
+  <h2>Regelung</h2>
+  <ul>
+    <li>Pro Zone Soll, Maximalzeit und Pause.</li>
+    <li>Mit Hysterese: Start unter dem Soll, Stopp am Soll. Kein ständiges Schalten.</li>
+    <li>Maximalzeit, dann Pause. Keine Zone läuft endlos.</li>
+    <li>Immer nur eine Zone. Der Wasserdruck bleibt.</li>
+  </ul>
+
+  <h2>Handbetrieb und Schutz</h2>
+  <ul>
+    <li>Handbetrieb zum Prüfen von Ventil und Schlauch. Der Feuchtewert stoppt ihn nicht. Knopf oder fünf Minuten.</li>
+    <li>Frostschutz schließt die Zone, auch im Handbetrieb.</li>
+    <li>Anlage oder einzelne Zone aus. Werte bleiben gespeichert, auch nach Stromausfall.</li>
+  </ul>
+
+  <h2>Display</h2>
+  <p>Istwert, Temperatur, Sollwert, Status und letzte Gießdauer. Status: Bereit, bewässert, Pause, Frostschutz, Sensorfehler, Handbetrieb. Nach der eingestellten Zeit dunkel, per Tipp hell.</p>
+
   <h2>Lieferumfang</h2>
   <ul>
-    <li>Steuerungsbox mit sieben Sensoreingängen und sieben Ausgängen für Magnetventile</li>
-    <li>Ausgang A1 für die Pumpe</li>
-    <li>Separates Display</li>
-    <li>Kurzanleitung</li>
+    <li>Steuerungsbox, Display, Kurzanleitung.</li>
+    <li>Sensoren, Ventile, Pumpe und Netzteil sind nicht enthalten.</li>
   </ul>
-  <p>Sensoren werden einzeln bestellt. Die Anzahl richtet sich nach der Zahl der Zonen.</p>
-  <h2>Systemübersicht</h2>
-  <p>Die Steuerung schaltet die Magnetventile der Zonen. Ventile und Pumpenschütz sind nicht im Lieferumfang.</p>
-  <img class="example" src="system-uebersicht.png" alt="Systemübersicht 7 Zonen">
-  <p class="caption">Steuerung, Ventile (nicht enthalten) und Pumpenschütz mit den sieben Zonen.</p>
+
   <div class="qty">
     <button onclick="chg(-1)">−</button>
     <input id="q" type="number" value="1" min="1" max="10">
