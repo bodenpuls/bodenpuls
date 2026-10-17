@@ -4,26 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bodenfeuchte-Sensor – Bodenpuls</title>
-<meta name="description" content="Bodenfeuchte-Sensor für eine Zone. Misst Feuchte und Temperatur in der Wurzelzone.">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f4f0;color:#1e2a22;line-height:1.6}
 header{background:#2c3a2e;color:#fff;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
 header a{color:#fff;text-decoration:none;font-weight:600}
 .cart-btn{background:#fff;color:#2c3a2e;border:0;border-radius:10px;padding:.55rem 1rem;font-weight:600;cursor:pointer}
-.wrap{max-width:860px;margin:0 auto;padding:2rem 1.2rem}
+.wrap{max-width:900px;margin:0 auto;padding:2rem 1.2rem}
 .back{color:#2c3a2e;text-decoration:none;font-size:.95rem}
 .hero-img{width:100%;border-radius:16px;margin:1rem 0 1.5rem;max-height:420px;object-fit:cover}
+.example{width:100%;border-radius:12px;margin:.6rem 0 1.2rem;display:block}
+.caption{font-size:.9rem;color:#5a6b60;margin:-.6rem 0 1.4rem}
 h1{font-size:2rem;letter-spacing:-.02em}
 .price{font-size:1.8rem;font-weight:650;color:#2c3a2e;margin:.4rem 0 1rem}
 .lead{font-size:1.1rem;color:#3d4f44;margin-bottom:1.2rem}
-ul{margin:0 0 1.1rem 1.15rem}
+ul{margin:0 0 1.2rem 1.2rem}
 li{margin:.35rem 0}
 .qty{display:flex;align-items:center;gap:.6rem;margin:1rem 0}
 .qty button{width:34px;height:34px;border:1px solid #d5d2cc;background:#fff;border-radius:8px;font-size:1.1rem;cursor:pointer}
 .qty input{width:52px;text-align:center;border:1px solid #d5d2cc;border-radius:8px;padding:.4rem}
 .add{background:#2c3a2e;color:#fff;border:0;border-radius:10px;padding:.8rem 1.4rem;font-weight:500;cursor:pointer}
-h2{font-size:1.22rem;margin:1.5rem 0 .4rem}
+h2{font-size:1.25rem;margin:1.6rem 0 .5rem}
 </style>
 </head>
 <body>
@@ -36,25 +37,26 @@ h2{font-size:1.22rem;margin:1.5rem 0 .4rem}
   <img class="hero-img" src="03-tisch-display.jpg" alt="Bodenfeuchte-Sensor">
   <h1>Bodenfeuchte-Sensor</h1>
   <div class="price">49 €</div>
-  <p class="lead">Ein Sensor, eine Zone. Misst Feuchte und Temperatur in der Wurzelzone. Die Steuerung öffnet das Ventil nur anhand dieses Werts.</p>
-
-  <h2>Das Wichtige</h2>
+  <p class="lead">Misst die Bodenfeuchte in der Wurzelzone. Die Steuerung entscheidet anhand dieses Werts, ob die Zone bewässert wird.</p>
+  <h2>Merkmale</h2>
   <ul>
-    <li>Feuchte für die Regelung, Temperatur für den Frostschutz.</li>
-    <li>Kabellänge frei wählbar.</li>
-    <li>Ein Eingang, eine Zone. Selbstadressierung kommt später.</li>
-    <li>Ein einzelner Fehlwert setzt die Zone nicht auf Fehler.</li>
+    <li>Ein Sensor pro Zone. Selbst adressierbar, Zuordnung an der Steuerung.</li>
+    <li>Für Beet, Rasen und Kübel.</li>
+    <li>Kabellänge frei wählbar, passend zur Entfernung zur Steuerung.</li>
+    <li>Für den dauerhaften Einsatz im Boden oder Substrat.</li>
   </ul>
-
-  <h2>Position</h2>
+  <h2>Anzahl</h2>
+  <p>Die Menge entspricht der Zahl der Zonen. Indoor und Outdoor können gemischt werden.</p>
+  <h2>Einbau</h2>
+  <p>Sensor senkrecht platzieren, bis die Messstelle in der Wurzelzone sitzt. Kabel zur Steuerung führen und anschließen.</p>
   <ul>
-    <li>Rasen 8–12 cm, Beete 10–15 cm, Kübel mittig im Substrat.</li>
-    <li>Mindestens 15–20 cm vom Tropfer weg. Sonst misst er nass, während die Zone noch trocken ist.</li>
-    <li>Nicht am Topfrand, nicht auf der Grenze zur Nachbarzone.</li>
-    <li>Mehrere Töpfe an einem Ausgang: Sensor in einen repräsentativen Topf.</li>
+    <li>Rasen: 8–12 cm, im Hauptwurzelbereich.</li>
+    <li>Beete und Stauden: 10–15 cm.</li>
+    <li>Kübel und Töpfe: mittig im Substrat. Hängen mehrere Töpfe an einem Ausgang, den Sensor in einen repräsentativen Topf setzen.</li>
+    <li>Abstand zu Tropfern oder Auslässen: mindestens 15–20 cm.</li>
+    <li>Pro Zone ein Sensor, mittig oder an der Stelle mit dem höchsten Wasserbedarf.</li>
+    <li>Nicht auf der Grenze zu einer benachbarten Zone.</li>
   </ul>
-  <p>Die Steuerung glaubt dem Sensor. Sitzt er falsch, gießt sie falsch.</p>
-
   <div class="qty">
     <button onclick="chg(-1)">−</button>
     <input id="q" type="number" value="1" min="1" max="20">
