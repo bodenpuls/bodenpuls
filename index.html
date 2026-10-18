@@ -109,8 +109,22 @@ footer a{color:#2c3a2e;margin:0 .4rem}
   </header>
   <div class="items" id="items"></div>
   <div class="total" id="total">Summe: 0 €</div>
-  <button class="checkout" onclick="checkout()">Bestellung aufgeben (Überweisung)</button>
+  <div style="padding:0 1.2rem 1rem">
+    <input id="email" type="email" placeholder="Deine E-Mail für die Bestellbestätigung" style="width:100%;padding:.7rem;border:1px solid #d5d2cc;border-radius:8px;margin-bottom:.6rem">
+    <div style="display:flex;gap:.6rem">
+      <button class="checkout" style="flex:1" onclick="checkout('ueberweisung')">Überweisung</button>
+      <button class="checkout" style="flex:1;background:#0070ba" onclick="checkout('paypal')">PayPal</button>
+    </div>
+  </div>
 </aside>
+
+<div id="success" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:50;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:16px;padding:2rem;max-width:420px;text-align:center">
+    <h2 style="margin-bottom:1rem">Bestellung erfolgreich</h2>
+    <p id="success-text" style="margin-bottom:1.2rem;line-height:1.5"></p>
+    <button onclick="document.getElementById('success').style.display='none'" style="background:#2c3a2e;color:#fff;border:0;border-radius:10px;padding:.7rem 1.4rem;cursor:pointer">Weiter einkaufen</button>
+  </div>
+</div>
 
 <script>
 const PRODUCTS = {
@@ -151,9 +165,11 @@ function render(){
 }
 function openCart(){ document.getElementById("drawer").classList.add("open"); document.getElementById("overlay").classList.add("open"); }
 function closeCart(){ document.getElementById("drawer").classList.remove("open"); document.getElementById("overlay").classList.remove("open"); }
-function checkout(){
+function checkout(method){
   const keys = Object.keys(cart);
   if(!keys.length) return;
+  const email = document.getElementById("email").value.trim();
+  if(!email || !email.includes("@")){ alert("Bitte eine gültige E-Mail eingeben."); return; }
   const orderNr = "BP-" + new Date().getFullYear() + "-" + String(Math.floor(Math.random()*9000)+1000);
   let sum = 0;
   let items = keys.map(id => {
@@ -161,12 +177,36 @@ function checkout(){
     sum += line;
     return `${q}× ${p.name}`;
   }).join(", ");
-  const text = `Bestellung ${orderNr}\n\nArtikel: ${items}\nSumme: ${sum} €\n\nBitte überweisen Sie den Betrag an:\nIBAN: DE12 3456 7890 1234 5678 90\nBIC: XXXXXXXX\nVerwendungszweck: ${orderNr}\n\nNach Zahlungseingang versenden wir.\n\nTschüss Schätzen. Hallo Messen.\nGesündere Pflanzen durch bedarfsgerechte Bewässerung.`;
-  alert(text);
-  // Optional: Mail an dich senden oder in localStorage speichern
   const orders = JSON.parse(localStorage.getItem("bp-orders") || "[]");
-  orders.push({ orderNr, items, sum, date: new Date().toISOString(), status: "offen" });
+  orders.push({ orderNr, email, items, sum, method, date: new Date().toISOString(), status: "offen" });
   localStorage.setItem("bp-orders", JSON.stringify(orders));
+
+  if(method === "paypal"){
+    const f = document.createElement("form");
+    f.method = "post";
+    f.action = "https://www.paypal.com/cgi-bin/webscr";
+    f.innerHTML = `<input type="hidden" name="cmd" value="_cart"><input type="hidden" name="upload" value="1"><input type="hidden" name="business" value="${PAYPAL_EMAIL}"><input type="hidden" name="currency_code" value="EUR"><input type="hidden" name="charset" value="utf-8"><input type="hidden" name="custom" value="${orderNr}"><input type="hidden" name="email" value="${email}">`;
+    keys.forEach((id,i)=>{
+      const n = i+1, p = PRODUCTS[id];
+      f.innerHTML += `<input type="hidden" name="item_name_${n}" value="${p.name} (${orderNr})"><input type="hidden" name="amount_${n}" value="${p.price}"><input type="hidden" name="quantity_${n}" value="${cart[id]}">`;
+    });
+    document.body.appendChild(f);
+    f.submit();
+    return;
+  }
+
+  // Überweisung
+  const text = `Bestellnummer: <strong>${orderNr}</strong><br><br>
+    Artikel: ${items}<br>
+    Summe: ${sum} €<br><br>
+    Bitte überweisen an:<br>
+    IBAN: DE12 3456 7890 1234 5678 90<br>
+    BIC: XXXXXXXX<br>
+    Verwendungszweck: ${orderNr}<br><br>
+    Die Bestellbestätigung geht an ${email}.<br><br>
+    Tschüss Schätzen. Hallo Messen.`;
+  document.getElementById("success-text").innerHTML = text;
+  document.getElementById("success").style.display = "flex";
   cart = {};
   save();
   closeCart();
